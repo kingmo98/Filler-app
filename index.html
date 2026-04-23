@@ -47,10 +47,8 @@ body::after {
 content: ‘’;
 position: fixed;
 inset: 0;
-background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);
 pointer-events: none;
 z-index: 100;
-opacity: 0.4;
 }
 
 /* ─── HEADER ─── */
@@ -522,6 +520,28 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:16px; h
   <div id="recentContent"><div class="recent-empty">Nothing caught yet — start talking.</div></div>
 </div>
 
+<!-- Live Mode Settings -->
+<div class="settings-toggle" onclick="toggleLiveSettings()" style="border:1px solid #2a2a2a;background:#141414;">
+  <span>Alert Settings</span>
+  <span class="settings-arrow" id="liveSettingsArrow">▾</span>
+</div>
+<div class="settings-panel" id="liveSettingsPanel" style="border-top:none;">
+  <div class="settings-inner">
+    <div>
+      <div class="settings-section-title">Alert Type</div>
+      <div class="radio-row">
+        <div class="radio-opt active" id="liveOptVibrate" onclick="setLiveAlertType('vibrate')">📳 Vibrate</div>
+        <div class="radio-opt" id="liveOptSound" onclick="setLiveAlertType('sound')">🔔 Sound</div>
+        <div class="radio-opt" id="liveOptBoth" onclick="setLiveAlertType('both')">Both</div>
+      </div>
+    </div>
+    <div>
+      <div class="settings-section-title">Filler Words</div>
+      <div class="chip-row" id="liveChipRow"></div>
+    </div>
+  </div>
+</div>
+
 <button class="live-btn start" id="liveBtn" onclick="toggleLive()">START LIVE MODE</button>
 ```
 
@@ -686,6 +706,40 @@ const shared = {
 
 let fillerWords = ['like', 'um', 'uh'];
 let activeFillers = new Set(['like', 'um', 'uh']);
+
+// ─── LIVE MODE SETTINGS ───────────────────────────────────
+let liveAlertType = 'vibrate';
+
+function toggleLiveSettings() {
+  const panel = document.getElementById('liveSettingsPanel');
+  const arrow = document.getElementById('liveSettingsArrow');
+  const open = panel.classList.toggle('open');
+  arrow.classList.toggle('open', open);
+}
+
+function setLiveAlertType(type) {
+  liveAlertType = type;
+  ['vibrate','sound','both'].forEach(t => {
+    const id = 'liveOpt' + t.charAt(0).toUpperCase() + t.slice(1);
+    document.getElementById(id).classList.toggle('active', t === type);
+  });
+}
+
+function renderLiveChips() {
+  const row = document.getElementById('liveChipRow');
+  row.innerHTML = '';
+  fillerWords.forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'chip' + (activeFillers.has(w) ? ' active' : '');
+    chip.textContent = w;
+    chip.onclick = () => {
+      if (activeFillers.has(w)) { if (activeFillers.size === 1) return; activeFillers.delete(w); chip.classList.remove('active'); }
+      else { activeFillers.add(w); chip.classList.add('active'); }
+      renderChips(); renderLiveChips();
+    };
+    row.appendChild(chip);
+  });
+}
 
 // ─── MODE SWITCHING ───────────────────────────────────────
 let currentMode = 'live';
