@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #333; display: flex; justify-content: center; align-items: flex-start; padding: 40px; min-height: 100vh; }
+  .banner {
+    width: 1200px;
+    height: 320px;
+    background: #0c0c0c;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+    flex-shrink: 0;
+    display: flex;
+  }
+
+/* Red left bar */
+.left-bar { width: 6px; background: #ff3333; flex-shrink: 0; }
+
+/* Left section */
+.left {
+width: 380px;
+flex-shrink: 0;
+padding: 30px 30px 30px 36px;
+border-right: 1px solid #2a2a2a;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+.wordmark {
+font-family: ‘Arial Black’, Arial, sans-serif;
+font-weight: 900;
+font-size: 92px;
+color: #f5f2ed;
+letter-spacing: -2px;
+line-height: 1;
+}
+.dot { color: #ff3333; }
+.tagline { font-size: 14px; color: #555; letter-spacing: 9px; margin-top: 10px; }
+.red-line { width: 70px; height: 3px; background: #ff3333; margin-top: 8px; }
+.meta { font-size: 10px; color: #2a2a2a; letter-spacing: 2px; margin-top: 14px; line-height: 1.9; text-transform: uppercase; }
+
+/* Middle section */
+.middle {
+width: 310px;
+flex-shrink: 0;
+padding: 30px 28px;
+border-right: 1px solid #2a2a2a;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+.stat-label { font-size: 9px; color: #555; letter-spacing: 3px; text-transform: uppercase; }
+.stat-val { font-family: ‘Arial Black’, Arial, sans-serif; font-size: 48px; letter-spacing: -1px; line-height: 1.05; margin-top: 2px; }
+.red { color: #ff3333; }
+.amber { color: #f0a500; }
+.divider { height: 1px; background: #2a2a2a; margin: 14px 0; }
+.stat-sub { font-size: 10px; color: #333; letter-spacing: 1px; text-transform: uppercase; line-height: 1.8; margin-top: 10px; }
+
+/* Right section */
+.right {
+flex: 1;
+padding: 30px 28px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+.right-label { font-size: 9px; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; }
+.item { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.bar { width: 3px; height: 18px; background: #ff3333; flex-shrink: 0; }
+.bar.green { background: #00e676; }
+.item-text { font-size: 12px; color: #f5f2ed; }
+</style>
+
+</head>
+<body>
+<div class="banner">
+  <div class="left-bar"></div>
+
+  <div class="left">
+    <div class="wordmark">FILL<span class="dot">.</span>ER</div>
+    <div class="tagline">TALK BETTER.</div>
+    <div class="red-line"></div>
+    <div class="meta">Human Skills Technology<br>Dallas, TX · Pre-Seed · 2026</div>
+  </div>
+
+  <div class="middle">
+    <div class="stat-label">Market Size</div>
+    <div class="stat-val red">$5.67B</div>
+    <div class="divider"></div>
+    <div class="stat-label">One-Time Price</div>
+    <div class="stat-val amber">$14.99</div>
+    <div class="stat-sub">7-day free trial · no subscription<br>kingmo98.github.io/Filler-app</div>
+  </div>
+
+  <div class="right">
+    <div class="right-label">Why Filler Wins</div>
+    <div class="item"><div class="bar"></div><div class="item-text">Sub-200ms detection</div></div>
+    <div class="item"><div class="bar"></div><div class="item-text">100% on-device · private</div></div>
+    <div class="item"><div class="bar"></div><div class="item-text">All-day passive Live Mode</div></div>
+    <div class="item"><div class="bar"></div><div class="item-text">Apple Watch integration</div></div>
+    <div class="item"><div class="bar green"></div><div class="item-text">Human Skills Technology</div></div>
+  </div>
+</div>
+</body>
+</html>
